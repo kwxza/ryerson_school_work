@@ -1,0 +1,50 @@
+
+# The examples below are in Elixir (and Haskell) format. Simply convert the lists to Smalltalk arrays for that language. 
+# Please let me know if you think there are any errors in these examples.
+# They are very simple, and this is intended. It's up to you to come up with your own additional test cases for
+# trickier shufflings. These are mainly meant for you to ensure you're implementing the input and output format correctly. 
+
+# 1-52 in order. Each hand gets a flush, but the second hand has a higher flush
+[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52]
+# Output, when sorted, looks like this. You can use Enum.sort in Elixir. 
+["11C", "3C", "5C", "7C", "9C"]
+
+# Two pair VS three of a kind. Three of a kind wins.
+[1,5,14,18,2,31,15,8,9,10,11,12,13,3,7,16,17,4,19,20,21,22,23,24,25,26,27,28,29,30,6,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52]
+["11C", "6C", "6D", "6H", "9C"]
+
+# Three of a kind VS full house. Full house wins.
+[1,2,14,15,27,3,4,16,5,29,6,7,8,9,10,11,12,13,17,18,19,20,21,22,23,24,25,26,28,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52]
+["3C", "3D", "4C", "4D", "4H"]
+
+# Three of a kind VS straight. Straight wins.
+[1,2,14,4,27,16,7,18,9,19,11,12,13,3,15,6,17,8,10,20,21,22,23,24,25,26,5,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52]
+["3C", "4D", "5C", "6D", "7D"]
+
+# Straight VS flush. Flush wins.
+[27,2,29,4,31,16,33,18,35,19,11,12,13,3,15,6,17,8,10,20,21,22,23,24,25,26,5,28,14,30,2,32,7,34,9,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52]
+["10H, "2H", "4H", "6H", "8H"]
+
+# Flush VS full house. Full house wins.
+[1,2,9,15,10,3,11,16,12,29,13,7,8,14,27,4,5,6,17,18,19,20,21,22,23,24,25,26,28,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52]
+["3C", "3D", "4C", "4D", "4H"]
+
+# Full house VS four of a kind. Four of a kind wins.
+[13,2,26,15,39,3,52,16,12,29,1,7,8,14,27,4,5,6,17,18,19,20,21,22,23,24,25,9,28,30,31,32,33,34,35,36,37,38,10,40,41,42,43,44,45,46,47,48,49,50,51,11]
+["13C", "1C", "1D", "1H", "1S"]
+
+# Four of a kind VS straight flush. Straight flush wins.
+[13,2,26,3,39,4,52,5,12,6,1,7,8,14,27,15,16,29,17,18,19,20,21,22,23,24,25,9,28,30,31,32,33,34,35,36,37,38,10,40,41,42,43,44,45,46,47,48,49,50,51,11]
+["3C", "4C", "5C", "6C", "7C"]
+
+# Straight flush VS royal flush. Royal flush wins
+[9,2,10,3,11,4,12,5,13,6,1,7,8,14,27,15,16,29,17,18,19,20,21,22,23,24,25,52,28,30,31,32,33,34,35,36,37,38,26,40,41,42,43,44,45,46,47,48,49,50,51,39]
+["10C", "11C", "12C", "13C", "1C"]
+
+
+
+
+
+
+
+

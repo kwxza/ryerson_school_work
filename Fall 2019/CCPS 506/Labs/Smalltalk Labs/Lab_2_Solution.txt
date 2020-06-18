@@ -1,0 +1,81 @@
+Lab 2 Solutions: Kasaine Kipusi, student # 500936268
+
+1. pokerStraight method:
+
+pokerStraight: inputArray
+| cards comparator |
+
+"First check if input is a valid poker hand."
+inputArray isArray ifFalse: [ ^false ] ifTrue: [ 
+		inputArray size = 5 ifFalse: [ ^false ] ifTrue: [ 
+			inputArray do: [ :arrayItem |
+				arrayItem isInteger ifFalse: [ ^false ] ifTrue: [ 
+					(arrayItem between: 1 and: 13) ifFalse: [ ^false ] ] ] ] ].
+
+cards := SortedCollection new.
+cards addAll: inputArray.
+
+"Shift 1 to 14 if ace could be high, then check if cards are consecutive."
+((cards first = 1) and: (cards last = 13))
+		ifTrue: [ cards remove: 1; add: 14 ]. 
+comparator := cards at: 1.
+cards do: [ :card | 
+	comparator = card ifFalse: [ ^false ].
+	comparator := comparator + 1 ].
+
+"If all checks passed, return true."
+^true.	
+
+
+
+
+2. pokerFullHouse method:
+
+pokerFullHouse: inputArray
+| cardDictionary |
+
+"First check if input is a valid poker hand."
+inputArray isArray ifFalse: [ ^false ] ifTrue: [ 
+		inputArray size = 5 ifFalse: [ ^false ] ifTrue: [ 
+			inputArray do: [ :arrayItem |
+				arrayItem isInteger ifFalse: [ ^false ] ifTrue: [ 
+					(arrayItem between: 1 and: 13) ifFalse: [ ^false ] ] ] ] ].
+
+"Create dictionary of how many times card values occur."
+cardDictionary := Dictionary new.
+inputArray do: [ :cardValue | | dictionaryEntry |
+	dictionaryEntry := cardDictionary at: cardValue ifAbsent: [ 0 ]. 
+	cardDictionary at: cardValue put: (dictionaryEntry + 1) ].
+
+"Verify dictionary holds 2 different card values and neither appears 4 times."
+(cardDictionary size = 2) ifFalse: [ ^false ] ifTrue: [ 
+	(cardDictionary includes: 4) ifTrue: [ ^false ] ].
+
+"If all tests pass, return true."
+^true.
+
+
+
+
+3. pokerTwoPair method:
+
+pokerTwoPair: inputArray
+| cardDictionary |
+"First check if input is a valid poker hand."
+inputArray isArray ifFalse: [ ^false ] ifTrue: [ 
+		inputArray size = 5 ifFalse: [ ^false ] ifTrue: [ 
+			inputArray do: [ :arrayItem |
+				arrayItem isInteger ifFalse: [ ^false ] ifTrue: [ 
+					(arrayItem between: 1 and: 13) ifFalse: [ ^false ] ] ] ] ].
+
+"Create dictionary of how many times card values occur."
+cardDictionary := Dictionary new.
+inputArray do: [ :cardValue | | dictionaryEntry |
+	dictionaryEntry := cardDictionary at: cardValue ifAbsent: [ 0 ]. 
+	cardDictionary at: cardValue put: (dictionaryEntry + 1) ].
+
+"Verify dictionary has 2 card values which both appear 2 times."
+((cardDictionary occurrencesOf: 2) = 2) ifFalse: [ ^false ].
+
+"If all tests pass, return true."
+^true.
