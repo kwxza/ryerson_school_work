@@ -1,0 +1,16 @@
+Lab 4 - Hashtables from scratch
+
+
+Create a file called Lab4-YourStudentNumber.py. Incorrectly named files will receive a mark of zero.
+
+First, create a method called getName() that returns your name. If this does not work, you will receive a mark of zero.
+
+A class called MyHashTable is given. Implement a constructor that takes two parameters: one is the size of the table to be constructed; the other a function called hash1. Implement a method put(key, data) where it hashes the key using the hash1 method, stores the data in a single list, and then return True if successfull, otherwise return False. Nothing should be done in the event of a hash collision - no data can be overwritten, and no secondary storage method should be introduced.
+
+A class called MyChainTable that extends MyHashTable is given. Implement a constructor that takes two parameters: one is the size of the table to be constructed; the other a function called hash1. Implement a method put(key, data) where it hashes the key using the hash1 method, stores the (key, data) as a tuple in a list at the associated hash value, and should always return True.
+
+A class called MyDoubleHashTable that extends MyHashTable is given. Implement a constructor that takes three parameters: the size of the table to be constructed; a function called hash1; and another function called hash2. Implement a method put(key,data) where it hashes the key using has1 method, stores data in a single list, and in the case where there is a collision, use the hash2 function get the offset step. Your implementation should account for if the table is full or when it cannot find a place to insert. These two cases should result in a return of False and True when the insert is successful. 
+
+Use Lab4Tester.py to test your code
+Example command line:
+$python Lab4Tester.py Lab4-123456789.py

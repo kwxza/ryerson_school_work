@@ -1,0 +1,17 @@
+Lab 1 - Queues and Stacks
+
+Create a file called Lab1-YourStudentNumber.py. Incorrectly named files will receive a mark of zero.
+
+First, create a method called getName() that returns your name. If this does not work, you will receive a mark of zero.
+
+A Node class is given. You are to create Queue and Stack ADTs using a linked implementation. The implementations are linked Nodes. 
+
+A class called MyQueue is given. You are to implement the methods enqueue(x), dequeue(), and length(). An item enqueued should be added to the end of the queue, and an item dequeued should be removed and returned from the beginning. The function length() should return the number of items in the queue. This function should be O(1).
+
+A class called MyStack is given. You are to implement the methods push(x), pop(), and length(). An item pushed should be added to the top of the stack, and an item popped should be removed and returned from the top. The function length() should return the number of items in the stack. This function should be O(1).
+
+You cannot use Python's list in your implementation. This includes the methods appends, pop, etc. You must use the Node class given.
+
+Use Lab1Tester.py to test your code
+Example command line:
+$python Lab1Tester.py Lab1-123456789.py

@@ -1,0 +1,59 @@
+CPS305 Assignment 2
+
+---------------------------
+
+Topics: 
+------
+ Tries, recursion
+
+Files:
+------
+  A2-studentnumber.py
+
+Submit Files:
+------------
+  Submit file through D2L
+
+
+Summary:
+--------
+
+Given: You are given a Python Class template, and a list of words in the
+       file 'american-english-no-accents.txt'. In the template 
+
+Task:  Write a recursive trie data structure. Each node should store either 
+       a character or a word. Then, implement the autocomplete method. This
+       method should recursively explore the trie and return a list of all
+       words in the trie that match that prefix. The list must be in
+       alphabetical order.
+
+Example:
+       Given the words 'dad', 'daddy', 'daddio', 'danny', 'mum',
+       and 'mummy', the trie should look like this:
+											|  |
+											  \
+                                  |d|m|
+                                 /     \
+                              |a|       |u|
+                            /             \
+                          |d | n|         |m|
+                         /      \          \
+                       |d | #|  danny    |m | #| 
+                     /      \             /    \
+                  |i | y|   dad        mummy   mum    
+                /      \
+             daddio   daddy                
+
+       When the prefix 'da' is autocompleted, the list returned should be:
+       ['dad', 'daddio', 'daddy', 'danny']. When the prefix '' is given, 
+       every word in the trie should be returned, in alphabetical order. When
+       the prefix 'uncl' is given, an empty list should be returned.
+
+Notes: Ensure that duplicate words do not get added to the trie twice. 
+       Both lower and upper case letters will be used. Consider them as
+       seperate characters, upper case letters coming before lower case. 
+       The file 'american-english-no-accents.txt' is used by the tester
+       but you can write your own test dictionary and tester program.
+
+
+

@@ -1,0 +1,17 @@
+Stack (LIFO):
+    The stack class will have a pointer to the 
+    last element added.
+    It will also have a length tracker that is
+    incremented in push() and decremented in pop().
+    - push()
+    - pop()
+    - length()
+
+Queue (FIFO):
+    The queue class will have pointers to the 
+    head and tail elements.
+    The length tracker variable will be incremented
+    in enqueue() and decremented in dequeue().
+    - enqueue()
+    - dequeue()
+    - length()

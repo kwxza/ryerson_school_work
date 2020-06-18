@@ -1,0 +1,17 @@
+Lab 2 - Trees, BST and AVL
+
+Create a file called Lab2-YourStudentNumber.py. Incorrectly named files will receive a mark of zero.
+
+First, create a method called getName() that returns your name. If this does not work, you will receive a mark of zero.
+
+You are given the class MyTree in the template file. The follow methods getLeft(), getRight(), getData(), are given. Do not change them. The method __init__(x) is also given. You may add to this. You are to implement the insert(x) and getHeight() methods. Each child should itself be a MyTree object. 
+
+The insert(x) method should be implemented with a recursive algorithm. The final return is the root node. The getHeight() method should return the height of the node. The height of a leaf node should be zero. 
+
+A class called MyBST that extends MyTree is given. Override the method insert(x) to meet the definitions of a Binary Search Tree. Create a method called __contains__(x) that returns true if x is in the tree.
+
+A class called MyAVL that extends MyBST is given. Override the method insert(x) to meet the definitions of an AVL Tree. Create a method called getBalanceFactor() that returns the balance factor of the node. It is suggested that you implement the methods leftRotate() and rightRotate().
+
+Use Lab2Tester.py to test your code
+Example command line:
+$python Lab2Tester.py Lab2-123456789.py

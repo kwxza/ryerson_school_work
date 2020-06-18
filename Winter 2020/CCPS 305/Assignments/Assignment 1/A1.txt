@@ -1,0 +1,115 @@
+CPS305 Assignment 1
+
+---------------------------
+
+Topics: 
+------
+  recursion, ADTs 
+
+Files:
+------
+  A1-studentnumber.py
+  Incorrectly named files will receive a mark of zero.
+
+Submit Files:
+------------
+  Submit file through D2L
+
+
+Summary:
+--------
+
+Given: You are given a Python Class template. In this class there is a
+       class variable vector, is a list of non-negative integers and are 
+       stored (in positions 0, 1, 2, ... (N-1)), where the integer in 
+       position (N-1) is 0.
+       
+Task:  Write a recursive function "findAllPaths" to find all  possible 
+       path through V starting at position 0, and ending at 
+       position (N-1), in accordance with the Rule below. If multiple
+       paths exist, add all of them to a class variable called "paths." 
+       If no such path exists, "paths" should be an empty list. You also
+       have to write a function called "getPaths" return paths which is
+       a list of lists.
+       
+Rule:  From position i, the next position in the path must be either i+x, 
+       or i-x, where x is the non-negative integer stored in position i.
+       There is no path possible from position i to position i+x if
+       either of these 2 conditions hold:
+       position i+x is beyond the end of V.
+       position i+x is already on the path.
+       There is no path possible from position i to position i-x if
+       either of these 2 conditions hold:
+       position i-x is beyond the start of V.
+       position i-x is already on the path.
+Example:
+       Suppose V contained the following:
+       Position: 0 1 2 3 4 5 6 7 8 9 10 11
+       Integer:  2 8 3 2 7 2 2 3 2 1 3  0
+       Then one path is:
+       0 2 5 7 4 11
+       i.e., you could get from position 0 to position 11 of V by
+       following the path of positions: 0 2 5 7 4 11
+       Note that other paths also exist, such as:
+       0 2 5 3 1 9 8 10 7 4 11
+
+Recursive Algorithm
+-------------------
+Your solution MUST use a recursive function to identify the paths. 
+
+You must implement the recursive function, as follows:
+ 
+  def findAllPaths(self, position, solution):
+
+"findAllPaths" takes the initial part of a solution Path, and
+a potential next solution position in the Vector. It explores
+paths with the given position appended to the given solution
+path so far.
+
+The class variable paths is a list of lists and the function 
+"getPaths" returns it
+
+Approach:
+--------
+It will be helpful if you do NOT try to write the complete
+finddAllPaths at once, but, instead, start off with a simple
+prototype, get it working, and then incrementally add functionality
+to the prototype until you arrive at the completed assignment.
+For example:
+1. Start off with a prototype "findAllPaths" that simply returns 0
+   if NO solution path exists, and returns 1 if ANY solution path
+   exists. This prototype does not keep track of the solution 
+   path. This prototype simply returns 1 the first time it
+   encounters position (size-1) in its explorations.
+   This prototype has only 2 parameters: position and V.
+2. Modify "findAllPaths" to keep track of the solution path found
+   in part 1 above. Add parameter Solution, and store this
+   solution path in it. "findAllPaths" returns similarly to
+   prototype 1 above, except its caller will find a solution
+   path in the Solution parameter. Add additional parameters 
+   to "findAllPaths" as necessary.
+3. Modify "findAllPaths" to continue exploring after the a solution
+   path is found. The trick is to force the recursion to 
+   keep going even after it finds a solution. It returns only when every
+   path has been explored (following the Rule).
+
+
+
+Example Run:
+------------
+Example vector: [2, 8, 3, 2, 7, 2, 2, 3, 2, 1, 3, 0]
+Valid paths:
+0 2 5 7 4 11 
+0 2 5 3 1 9 10 7 4 11 
+0 2 5 3 1 9 8 10 7 4 11 
+0 2 5 3 1 9 8 6 4 11 
+
+No Solution example:
+3 1 1 1 3 4 2 5 3 0
+
+Use A1Tester.py to test your code
+Example command line:
+$python A1Tester.py A1-123456789.py
+
+
+

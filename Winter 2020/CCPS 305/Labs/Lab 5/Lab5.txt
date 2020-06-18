@@ -1,0 +1,21 @@
+Lab 5 - Building a MaxHeap
+
+
+Create a file called Lab5-YourStudentNumber.py. Incorrectly named files will receive a mark of zero.
+
+First, create a method called getName() that returns your name. If this does not work, you will receive a mark of zero.
+
+A class called MyHeap is given. Implement the follow methods: __init__(self, array) creates the initial array and build the heap using the O(n) method; insert(self, data) should insert a new element in the heap;  heapify(self) should ensure that the heap property is maintained after insertion; extractFirst() should return the first element of the heap; __len__() should return the size of the heap in O(1); getData(self) should return the array.
+
+You should use a single list to fill data. 
+
+You may not use heapq to implement this.
+
+Use Lab5Tester.py to test your code
+Example command line:
+$python Lab5Tester.py Lab5-123456789.py
+
+
+
+
+

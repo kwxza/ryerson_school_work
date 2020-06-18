@@ -1,0 +1,34 @@
+Preorder tree traversal (iterative):
+Pop last item and insert its right child and then left child
+
+stack:
+1. A
+2. C B
+3. C E D
+4. G F
+
+Returned list:
+1. A
+2. A B
+3. A B D E C 
+4. A B D E C F G
+
+
+
+In-order tree traversal (recursive):
+
+inOrder(T):
+	if(!empty(T)):
+		inOrder(T.leftChild)
+		print(T.data)
+		inOrder(T.rightChild)
+
+
+Post-order tree traversal (recursive):
+
+postOrder(T):
+	if(!empty(T)):
+		postOrder(T.leftChild)
+		postOrder(T.rightChild)
+		print(T.data)	
+

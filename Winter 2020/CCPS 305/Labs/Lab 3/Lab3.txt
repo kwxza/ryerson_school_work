@@ -1,0 +1,19 @@
+Lab 3 - Huffman Trees
+
+Create a file called Lab3-YourStudentNumber.py. Incorrectly named files will receive a mark of zero.
+
+First, create a method called getName() that returns your name. If this does not work, you will receive a mark of zero.
+
+A class called MyHuffman is given. Implement a method called build(x) where x is a dictionary of characters to integers, in which the integer is the frequency of that character. The method should build a huffman tree based on these given frequencies.
+
+Implement a method called encode(x) that takes the string x and returns a bitstring by applying the rules in your huffman tree. A bit string is a standard string with only the characters '0' and '1'.
+
+Implement a method called decode(x) that takes the bitstring x and returns a string by applying the rules in your huffman tree.
+
+The structure of the tree should adhere to the efficiency of Huffman's algorithm. Implementation details are up to you.
+
+The give Node class is there if you choose to use it.
+
+Use Lab3Tester.py to test your code
+Example command line:
+$python Lab3Tester.py Lab3-123456789.py
