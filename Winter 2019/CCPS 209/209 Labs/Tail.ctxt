@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Tail
+comment1.params=n
+comment1.target=Tail(int)
+comment2.params=
+comment2.target=void\ startFile()
+comment3.params=line
+comment3.target=void\ processLine(java.lang.String)
+comment4.params=
+comment4.target=java.util.List\ endFile()
+numComments=5

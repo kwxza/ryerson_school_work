@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=P2J2Test
+comment1.params=
+comment1.target=void\ testRemoveDuplicates()
+comment2.params=rng
+comment2.target=char\ randomChar(java.util.Random)
+comment3.params=rng\ len
+comment3.target=java.lang.String\ buildString(java.util.Random,\ int)
+comment4.params=
+comment4.target=void\ testUniqueCharacters()
+comment5.params=
+comment5.target=void\ testCountSafeSquaresRooks()
+comment6.params=
+comment6.target=void\ testRecaman()
+numComments=7

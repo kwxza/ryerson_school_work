@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=PolynomialTestTwo
+comment1.params=deg\ rng
+comment1.target=Polynomial\ createRandom(int,\ java.util.Random)
+comment2.params=p1\ p2\ check
+comment2.target=boolean\ polyEq(Polynomial,\ Polynomial,\ java.util.zip.CRC32)
+comment3.params=
+comment3.target=void\ massTest()
+numComments=4

@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Primes
+comment1.params=
+comment1.target=void\ expandPrimes()
+comment1.text=\r\n\ \ \ \ When\ called,\ expandPrimes\ will\ find\ the\ next\ prime\ number\r\n\ \ \ \ not\ currently\ in\ the\ knownPrimes\ List,\ and\ add\ it\ to\ the\ List.\r\n
+comment2.params=n
+comment2.target=boolean\ isPrime(int)
+comment2.text=\r\n\ \ \ \ isPrime()\ will\ take\ a\ given\ parameter\ n\ and\r\n\ \ \ \ return\ true\ if\ n\ is\ prime\ or\ false\ otherwise.\r\n
+comment3.params=k
+comment3.target=int\ kthPrime(int)
+comment3.text=\r\n\ \ \ \ kthPrime()\ takes\ a\ given\ parameter\ k\r\n\ \ \ \ and\ returns\ the\ kth\ prime\ from\ the\r\n\ \ \ \ knownPrimes\ List,\ with\ indexing\ \r\n\ \ \ \ beginning\ from\ zero.\r\n\ \ \ \ \r\n\ \ \ \ If\ k\ is\ larger\ than\ the\ last\ index\ of\r\n\ \ \ \ knownPrimes,\ the\ method\ will\ call\r\n\ \ \ \ expandPrimes\ until\ the\ last\ index\ of\r\n\ \ \ \ knownPrimes\ is\ equal\ to\ k.\r\n
+comment4.params=n
+comment4.target=java.util.List\ factorize(int)
+comment4.text=\r\n\ \ \ \ factorize()\ takes\ a\ given\ parameter\ n\ and\ returns\r\n\ \ \ \ its\ prime\ factors\ as\ an\ ArrayList\ sorted\ into\r\n\ \ \ \ ascending\ order.\r\n
+numComments=5

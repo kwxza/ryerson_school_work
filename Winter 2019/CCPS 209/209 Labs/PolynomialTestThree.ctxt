@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=PolynomialTestThree
+comment1.params=
+comment1.target=void\ testEquals()
+comment2.params=
+comment2.target=void\ testCompareTo()
+comment3.params=deg\ rng
+comment3.target=Polynomial\ createRandom(int,\ java.util.Random)
+comment4.params=
+comment4.target=void\ massTest()
+numComments=5

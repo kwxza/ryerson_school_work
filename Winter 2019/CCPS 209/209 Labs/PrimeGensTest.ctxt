@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=PrimeGensTest
+comment1.params=
+comment1.target=void\ testTwinPrimes()
+comment2.params=
+comment2.target=void\ testSafePrimes()
+comment3.params=
+comment3.target=void\ testStrongPrimes()
+numComments=4

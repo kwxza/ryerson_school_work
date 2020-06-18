@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=P2J5
+comment1.params=
+comment1.target=void\ expandFibs()
+comment1.text=\r\n\ \ \ \ expandFibs()\ is\ a\ helper\ method\ that\ will\ add\ the\ \r\n\ \ \ \ next\ Fibonacci\ number\ to\ the\ FIBS\ list.\r\n
+comment2.params=n
+comment2.target=java.util.List\ fibonacciSum(java.math.BigInteger)
+comment2.text=\r\n\ \ \ \ This\ method\ finds\ the\ smallest\ amount\ of\ Fibonacci\r\n\ \ \ \ numbers\ that\ sum\ to\ a\ given\ BigInteger\ n.\r\n\ \ \ \ \r\n\ \ \ \ @param\ n\ The\ given\ BigInteger\ for\ which\ a\ sum\ will\ be\ found\r\n\ \ \ \ @return\ A\ list\ of\ the\ Fibonacci\ numbers\ that\ sum,\ in\ descending\ order.\r\n
+comment3.params=n
+comment3.target=java.math.BigInteger\ sevenZero(int)
+comment3.text=\r\n\ \ \ \ This\ method\ takes\ an\ integer\ n\ and\ finds\ the\ smallest\r\n\ \ \ \ number\ composed\ of\ only\ 7s\ and/or\ 0s\ that\ n\r\n\ \ \ \ can\ fully\ divide.\r\n\ \ \ \ @param\ n\ The\ number\ for\ which\ a\ 7/0\ dividend\ will\ be\ found.\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ It\ is\ assumed\ that\ n\ is\ given\ in\ base\ 10.\r\n\ \ \ \ @return\ A\ BigInteger\ number\ divisible\ by\ n\ will\ be\ returned.\r\n
+numComments=4

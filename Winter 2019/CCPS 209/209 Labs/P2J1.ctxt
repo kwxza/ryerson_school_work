@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=P2J1
+comment1.params=n\ k
+comment1.target=int\ fallingPower(int,\ int)
+comment2.params=arr
+comment2.target=int[]\ everyOther(int[])
+comment3.params=rows\ cols\ start
+comment3.target=int[][]\ createZigZag(int,\ int,\ int)
+comment4.params=arr
+comment4.target=int\ countInversions(int[])
+numComments=5

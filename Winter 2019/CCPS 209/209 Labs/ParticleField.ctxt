@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=ParticleField
+comment1.params=n\ width\ height
+comment1.target=ParticleField(int,\ int,\ int)
+comment2.params=g
+comment2.target=void\ paintComponent(java.awt.Graphics)
+comment3.params=
+comment3.target=void\ terminate()
+numComments=4

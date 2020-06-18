@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=AccessCountArrayListTest
+comment1.params=x\ check
+comment1.target=void\ updateCheck(double,\ java.util.zip.CRC32)
+comment2.params=
+comment2.target=void\ massTest()
+numComments=3

@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=FileProcessor
+comment1.params=
+comment1.target=void\ startFile()
+comment2.params=line
+comment2.target=void\ processLine(java.lang.String)
+comment3.params=
+comment3.target=java.lang.Object\ endFile()
+comment4.params=in
+comment4.target=java.lang.Object\ processFile(java.io.BufferedReader)
+numComments=5

@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=P2J3
+comment1.params=items
+comment1.target=void\ reverseAscendingSubarrays(int[])
+comment2.params=text
+comment2.target=java.lang.String\ pancakeScramble(java.lang.String)
+comment3.params=text
+comment3.target=java.lang.String\ reverseVowels(java.lang.String)
+comment4.params=items\ n\ goal
+comment4.target=boolean\ subsetSum(int[],\ int,\ int)
+numComments=5

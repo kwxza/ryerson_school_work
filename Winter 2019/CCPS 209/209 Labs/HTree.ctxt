@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=HTree
+comment1.params=w\ h
+comment1.target=HTree(int,\ int)
+comment2.params=g
+comment2.target=void\ paintComponent(java.awt.Graphics)
+comment3.params=x\ y\ i\ len\ g2
+comment3.target=void\ render(double,\ double,\ int,\ double,\ java.awt.Graphics2D)
+numComments=4

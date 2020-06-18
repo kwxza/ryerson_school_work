@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=StreamExercises
+comment1.params=path\ thres
+comment1.target=int\ countLines(java.nio.file.Path,\ int)
+comment2.params=path
+comment2.target=java.util.List\ collectWords(java.nio.file.Path)
+numComments=3
