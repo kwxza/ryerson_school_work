@@ -1,0 +1,131 @@
+Login Process:
+- login: <shortlogin>
+- passwd:
+
+  - authentication
+
+  - system profile - profile of system settings and commands to run
+    - /etc/profile
+
+  - user profile - profile of user settings and commands
+    - ~/.profile
+
+Recommendations when modifying your .profile:
+  1. Make a working copy.
+  2. Test command interactively, first.
+  3. Cut and paste (don't re-type).
+  4. Test in another window before logging out.
+
+Something every UNIX user should know:
+/etc/passwd - master list of accounts on a UNIX system
+
+Ex:
+lhiraki:x:7800:7800:Lester:/home/lhiraki:/bin/bash
+A      :B:C   :D   :E     :F            :G
+
+A - login name
+B - pw (password)
+C - uid (userid)
+D - gid (groupid)
+E - desc (description - often user account name)
+F - home directory (start point for current working directory on login)
+G - default shell
+
+
+More UNIX commands:
+
+- cut 
+  - eg. cut -c1-10,20-23 (columns 1-10, 20-23)
+  - eg. cut -f5 -d: /etc/passwd (cut the 5th field, delimiter of colon)
+
+- paste - displays files next to each other on screen
+  - paste f1 f2 f3 (sort of like a horizontal version of cat)
+
+- wc - word count
+  - wc chapter5
+    -- output: 37 491 2356 (A B C)
+    -- A: lines B: words C: characters
+  - wc -l chapter5
+    -- output: 37 (just lines)
+
+- grep - search within a file for a string (regular expression)
+  - grep Total sales2019 (print all lines from sales2019 containing 'Total')
+
+- sort 
+  - sort [options] fileName
+
+
+
+Filters and Re-direction:
+
+We can think of many UNIX commands as filters for their input.
+For example: cut filters for the selection its given
+
+Formal definition of ports:
+STDIN (standard input) port 0
+STDOUT (standard output) port 1
+STDERR (standard error) port 2
+  - commands take from STDIN and print to STDOUT
+  - commands print to STDERR when there is an error
+
+- Re-direction of command output into a file:
+  - Use '>' operator or '>>' operator
+  - Form: command > output_file/location
+  - Ex:
+    -- cat chapter1 chapter2 > book (create/overwrite book file)
+    -- cat chapter 3 >> book (create/append to book file)
+  - Re-direct error msg to a different port than STDOUT
+    -- 2> errors
+    -- The 1 is technically there in a regular re-direct, but assumed and so not typed.
+  - Re-direct command routing to both STDOUT and STDERR
+    -- cat text1 junk text3 > book 2> errors (directs text1 & text2 cat to book file and error msg to port 2 STDERR)
+  - Redirecting errors to STDERR doesn't keep the sequence of events
+
+  - Merge operator '>&' - merge one output stream to another
+    -- eg. cat text1 junk text3 > both 2>&1 (merge error stream to where STDOUT stream is going)
+  - You must use merge operator as opposed to giving both re-directs the same file to write to.
+    -- creates race condition that produces unpredictable results for the output.
+
+- Re-direction of input into a command
+  - Use '<' operator
+  - Form: command < input_file
+  - Ex:
+    -- cat < chapter5 (give the content of the file 'chapter5' to 'cat' command).
+      -- the cat command would read from STDIN if you call it with no argument (keyboard)
+      -- needs to read end_of_file character to stop
+      -- most commands will do this, because the STDIN is the keyboard
+  - End of file character:
+    -- CTRL + D (^D as displayed in CLI)
+
+In-Class Example: (printing one field before a field that appears before it using 'cut' command)
+cut -f5 -d: short_etc_passwd > descFile
+cut -f3 -d: short_etc_passwd > uidFile
+paste descFile uidFile
+  - Best practice to delete the temporary files used to store the intermediate data needed to get to the final solution
+    -- uidFile and descFile
+  - A question like this on midterm/final would require deleting temp files to be completely correct
+
+
+
+Pipes:
+- Problem: Find the number of entries in a directory
+  - Method 1:
+    -- ls /etc > file_list (this would find all entries in directory and re-direct it into a file)
+    -- wc -l file_list (this would display all the lines, ie. the number of entries in directory)
+    -- rm file_list (DELETE TEMPORARY FILES)
+  - Method 2:
+    -- ls /etc | wc -l (this will pipe the output of ls into wc and print wc output to STDOUT)
+
+- Definition:
+  - A pipe connects STDOUT of previous command to STDIN of following command.
+
+- Strategy for using pipes:
+  - cmd1 > out1
+  - cmd2 < out1 > out2 (which will become cmd 1 | cmd2 > out2 once pipe is used)
+  - cmd3 < out2 > out3
+  - ...
+
+When to use Pipes vs Re-directions?
+Key Points:
+- 1. re-direction - between a command and a file
+- 2. pipes - between commands

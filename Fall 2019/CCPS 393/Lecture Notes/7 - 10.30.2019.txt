@@ -1,0 +1,200 @@
+** notes using Hypress examples
+
+C Functions:
+https://www.ihypress.net/programming/c/05.php
+
+  - the output type of a function must be declared (can be void)
+  - the parameter types must also be declared
+    - Ex: int factorial (int n)
+
+  **Note: 
+	- return statements are of the form return (returned_value)
+	- return value can be empty
+	- void functions do not need a return statement
+
+
+
+Pointers:
+
+  Definition:
+  - A pointer is a variable that holds the memory address of another variable.
+
+  **NOT THE SAME as setting a variable equal to another variable
+    - Ex:
+	int a;
+	int c = 9;
+	int a = c;
+	// a now equals 9, a is NOT a pointer variable
+
+
+  Declaration & Initialization:
+
+    	int *p;		--> The '*' designates 'p' as a pointer variable.
+	p = &c;		--> '&' indicates the address of the specified variable (c).
+
+
+    - Example usage of a pointer variable:
+
+	printf ("%d", c);
+	printf ("%d", *p);	--> '*" indicates the variable pointed to by the specified pointer (p)
+  
+	- In this context, '*' is known as the dereference operator.
+
+
+
+  - Note:
+    In C, asterisk has 2 different meanings (related to pointers).
+	
+	1. In a declaration:
+		- It means the variable is a pointer (or pointer variable).	
+
+	2. Elsewhere: 
+		- it is the dereference operator
+		- ie. "variable pointed to by"
+
+  - Ex:
+	int x = 1, y = 2;
+	int *ip;
+	ip = &x;		--> ip points to x
+	y = *ip;		--> y is now 1
+	*ip = 0;		--> x is now 0
+
+  - Ex:
+	int x = 5, y = 7;
+	int *ip, *iq;
+	ip = &x;		--> pointing ip to x
+	iq = &y;		--> point iq to y
+	ip = iq;		--> ip now points to y
+
+  - Ex:
+	int x, *px;
+	double y, *py;
+	x = 5;
+	y = 3.14;
+	px = &x;
+	py = &y;
+	px = py;	**NOT ALLOWED IN C 
+
+	--> A pointer can only be associated with a certain type.
+
+
+  - What's wrong here?
+		
+	int *ptr;
+	*ptr = 8;
+
+	--> ptr hasn't yet been initialized
+	     - ie - not pointing to anything
+
+  - How to fix?
+	1. Declare storage for int
+	2. Initialize ptr
+
+
+* iHypress
+    - eg 2-8: do as HW
+    - 2-9: enrichment (optional content)
+
+  - Note:
+	int *p;
+	int * p;
+	int* p;
+
+	--> All of these are valid for declaring a pointer
+
+	int *p, px;
+	int * p, px;
+	int* p, px;
+
+	--> px is an int in all of these cases
+	--> the * does not distribute past the comma
+	--> there is no pointer type
+	--> the * has to be used for each pointer declared
+	    - ie - int *p, *q;
+
+
+
+Closures:
+	
+	void swap2 (int *px, int *py)
+	{
+		int temp;
+		temp = *px; 		--> this pointer was set in the function parameters
+		*px = *py;
+		*py = temp;
+	}
+
+
+	--> When calling this function:
+		
+		swap2 (&a, &b)
+	
+	--> Must use the address reference operator (&)
+
+
+
+[Ref Lab 11b prep]
+Separate Compilation and Make Utility:
+  
+  - gcc -c file1.c file2.c
+		
+	--> -c option for compiling without linking file - produces .o files
+
+  - link the output files using gcc
+  - Ex:
+	gcc file1.o file2.o
+
+	--> returns the a.out file (executable)
+	--> can be renamed, obviously
+
+  - separately compiled files can be linked by including the linked file as a header file
+  - Ex:
+	#include "file.h"
+  - the header file will contain function prototypes
+
+
+Using the Make Utility:
+  1. Draw a dependency diagram
+  2. Create a Makefile of required format
+  3. At Unix prompt, 
+	$ make <ENTER>
+  4. Need changes, edit, go to step 3
+
+Makefile format:
+	target: dependencies
+	<TAB> action
+	.
+	.
+	.
+	(repeat above as necessary)
+
+  - Ex of Makefile:
+	show_face: show_face.o face.o
+	<TAB> gcc -o show_face show_face.o face.o
+
+	show_face.o: show_face.c
+	<TAB> gcc -c show_face.c
+
+	face.o: face.c
+	<TAB> gcc -c face.c
+
+	**header files are not included in gcc commands
+
+  - can now run 'make' command in the shell to compile the source files as necessary
+  - the make utility will only compile files that have been changed since the last compilation 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

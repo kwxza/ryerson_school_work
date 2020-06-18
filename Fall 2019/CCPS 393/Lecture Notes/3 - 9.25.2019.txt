@@ -1,0 +1,272 @@
+Shell Variables:
+  1. special
+  2. environment
+  3. program
+
+1. Special variables:
+  - created and set by the OS automatically
+
+   > Positional parameters:
+     - Recall: cat ch1 ch2 ch3
+     - Want: myscript apple cherry
+			$1    $2   (in your program)
+
+   > $# - the number of command line arguments
+   > $? - return code of the previous command
+
+2. Environment variables:
+  - gives info about the current settings and configuration
+  - by convention - ALL_CAPS
+  - to display them, type 'env'
+
+3. Program variables:
+  - you create
+  - must be initialized before reading
+  - text type
+  - can be used anywhere text could be
+  - can be created interactively or within a script
+  - typically lower_case naming convention
+
+Creating and Using Program Variables:
+ex1: 
+  - temp_name=/usr/tmp  (assignment statement - no spaces between operators or characters of variable name!!)
+  - cp myfile $temp_name (use '$' sign when reading variable's value)
+
+ex2: 
+  - month=September
+  - echo The current month is $month
+
+  --> The '$' sign:
+	- is used only when reading from a variable, not writing to it (like in assignment)
+  --> Choose self-describing variable names
+ 	- Good:
+		- sum, total, x-value, length, count, etc...
+	- Bad:
+		- a, b, c, var1, var2, var3, etc...
+
+
+Quotes:
+ --> Single Quotes:
+	> Problem: 
+		grep Al Shaji employee_list
+		grep: can't open Shaji  (grep is taking 'Al' as the regular expression and trying to open a file called 'Shaji')
+	> Solution: 
+		grep 'Al Shaji' employee_list
+
+ --> Double Quotes:
+  - recognizes special characters and interprets them differently than single quotes will:
+    --> $, \, ` (tick or backquote)
+
+	> Problem: 
+		- Formatting a common heading for a set of files, where a certain spacing between column titles is required
+		ex: heading ='----Name----Addr----Phone' ('-' represents whitespace inside of heading variable)
+		- Then, using echo:
+			echo $heading (echo will see three CLI arguments from the variable - because of single quotes, swallows the whitespace)
+			-OR-
+			echo '$heading' (prints out the text '$heading' literally)
+	> Solution:
+		echo "$heading" (echo sees $heading as one CLI argument, because variables are interpreted within double quotes and substituted in)
+
+	- Ex: (the '$' sign in use within double quotes)
+		product=lunch
+		.
+		.
+		echo "The $product costs $5" ($product will work fine, but $5 will be interpreted as the 5th CLI variable)
+			--> need an escape character before $5
+			--> use the '\' character - eg. \$5
+		- Therefore:
+		  - echo "The $product costs \$5"
+
+
+Command Substitution:
+	> Problem:
+		today=date
+		.	
+		.
+		echo $today (returns the string 'date' instead of running the date command)
+
+	> Solution:
+		today=$(date)  - whatever is within () is treated as a Unix command and executed
+		.
+		.
+		echo $today (returns the result of the date command)
+ 
+ - How does command substitution work?
+	1. Runs (as a command) whatever is inside the $(...)
+	2. STDOUT of command is substituted at the position of the call.
+
+ - Old version of command substitution:
+	--> today=`date`  - legacy UNIX systems use backticks for command substitution
+
+
+In-Class Exercise:
+ - Write a script called 'findhome' that takes a username for argument and prints the home directory of the user
+	Solution:
+		#!/bin/bash
+		
+		userhome=$(grep $1 /etc/passwd | cut -f6 -d:) - command substitution searches for 1st CLI argument in '/etc/passwd', pipes the result to cut
+		echo The home directory is $userhome  - echo the command-substituting variable userhome
+		
+
+
+Read:
+ - sets a variable from STDIN
+ - Ex:
+    -> #!/bin/bash
+	.
+	echo What is your name?
+	read name			
+	echo Hello, $name! Pleased to meet you! 
+ 
+   --> 'read' will read everything from STDIN up to the newline character (user presses 'Enter' on keyboard) and writes it to a variable
+
+
+
+Test:
+ - evaluates a condition and  sets the return code ($?)
+ - does not print anything out
+
+**Abbreviation for test is '['  (left square bracket)
+
+**When using '[' notation, must leave whitespace between contents and opening and closing square brackets
+
+**IN UNIX** - 0 means true, != 0 means false
+
+ - Ex1:
+	test -r somefile
+	echo $?
+	-> output: 0
+ - Ex2:
+	test "myname" = "Ija"   (this expression must have spaces around '=' -> this is a comparison, not an assignment statement. Return code != 0)
+	echo $?
+	-> output: 1
+
+
+Control Structures (Part 1/2):
+ -> if-then-else:   (simplified syntax)
+
+	if [ test_condition ]      		--> any Unix statement, but usually the test commmand
+	then
+	   (command_list)
+	else                     		--> else clause is optional
+	   (command_list)
+	fi					--> 'fi' ends the if-then-else block
+
+ - Ex1:
+	if [ -r myfile ]
+	then
+	    cat myfile
+	else
+	    echo Enter data for file contents
+	    cat > myfile          		--> no input file, STDIN is what is redirecting towards myfile
+ - Ex2:
+	if [ -t 0 ]   				# Is STDIN a terminal?
+	then
+	    echo "Error message"
+	else
+	   echo "Error message" >> error.log  
+	fi 
+
+
+ -> if-then-else using elif 			--> general syntax
+	if [ test_condition ]
+	then
+	    command_list
+	elif [ test_condition ] 		--> repeat elif block 0 or more times
+	    command_list
+	else
+	    command_list
+	fi
+
+ - Case:
+    -> multi-way branch: (simplified syntax)
+
+	case $variable in			--> keywords 'case' and 'in'
+	
+	    val1) action1
+		  ;;	
+	    val2) action2
+		  ;;	
+	    val3) action3
+		  ;;
+	esac					--> 'esac' ends case block
+
+ - Ex:
+    - flexible command line processing
+    - Ex1:
+	myscript
+	myscript chapter3
+	myscript chapter3 chapter5		--> how could you write myscript to accept different (possibly wrong) user inputs?
+
+	case $# in
+	
+	    0) echo Enter file name:
+	       read arg1
+	       ;;
+	    1) arg1=$1
+	       ;;
+	    *) echo Invalid number of arguments
+	       echo "Syntax: $0 filename"	--> $0 represents the 0th CLI argument, aka the name of the script
+	       exit 1				--> 'exit' statement exits the program to its caller, 1 is setting return code for the script
+	       ;;
+	esac
+	..(program continues)
+
+  - multi-way branch				--> general syntax
+	
+	case match_str_expr in			--> match_str_expr - an expression that generates a string
+	    
+	    match_pattern)  action...		--> match_pattern represents particular cases of match_str_expr to handle
+			    ;;
+	esac
+
+  --> Ex2:
+
+	case $(date `+ %m`) in
+
+	    01|03|05|07|08|10|12)    echo This is a long month.
+				     ;;
+	    04|06|09|11)	     echo This is a short month.
+				     ;;
+	    02)			     echo This is the shortest month.
+				     ;;
+	    *)			     echo Uh-oh. Something wrong with the date command.
+				     ;;
+	esac
+
+**Default clause: Having the default clause of *) is always a good idea.
+
+
+
+Shift:
+  - moves arguments over 1 position (eg. arg2 -> arg1, arg3 -> arg2)
+
+  cmd  arg1  arg2  arg3
+       $1    $2    $3
+
+  - Ex:
+	echo The 1st arg is $1
+	echo The 2nd arg is $2
+	shift
+	echo The 2nd arg is $1 (yes $1)
+
+
+Exit Codes:
+  - Does 2 things:	
+	- Terminates current shell or script and returns control to calling shell, if any
+	- Sets the return code ($?) for your script
+
+  - Parent/child relationship with script/program called from another program
+  - Exit codes pass info upwards from child to parent upon exit (true/false - 0/1)
+
+
+
+#!/bin/bash:
+  - Known as shebang
+  - Specifies path to the interpreter
+  - #! (shebang followed by absolute path)
+  - Must be the 1st line of the file (to be seen by Unix)
+	- even before comments
+  - In a bash environment, misplacement of this line will not stop the script from working
+	- this is only the case for a bash environment and cannot be relied upon
+	

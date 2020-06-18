@@ -1,0 +1,134 @@
+UNIX:
+- Layered architecture
+  -- Shell sits on top of kernel which sits on top of hardware.
+
+The kernel is the core of an OS that interfaces directly with the hardware and so must be very specific to that particular hardware. (ie - designed for the processor architecture such as 32 vs 64 bit, machine language, etc).
+
+The shell is essentially the user interface. As the kernel is updated to accomodate more modern hardware, the shell of the OS can remain essentially the same.
+This is one of the reasons that UNIX has stayed relevant for so long.
+
+Key Features of UNIX:
+- Interactive:
+  -- A user can issue requests/commands and the OS will interpret the request and provide a response.
+- Multi-tasking:
+  -- The ability of a machine to maintain more than one thread of control. (Running more than one program at a time).
+- Multi-user:
+  -- The ability of the OS to separate between different users' file storage and installed and running programs.
+
+The UNIX Shell:
+- Different versions:
+  -- Bourne Shell
+    --> Every UNIX system has this.
+  -- Korn Shell (ksh)
+    --> Added math to what the Bourne Shell had, some data structures.
+  -- The C Shell (csh)
+  -- Bourne Again Shell (bash)
+    
+Hierarchical File System:
+**EVERYTHING IS A FILE IN UNIX** (even directories).
+- Root folder
+ -- Standard folders of UNIX systems:
+   -- etc
+     -- Operational and administrative
+   -- bin
+     -- binary directory where executable commands are installed
+    -- dev
+      -- devices
+    -- users* (not standard name)
+     -- individual accounts are held
+
+How to Specify a File or Directory in UNIX:
+  -- Absolute Method:
+    -- Start at the root folder and follow the path to the file/directory that you want.
+    -- Absolute always begins with the '/' to indicate beginning at the root folder.
+    -- Ex. /etc/passwd
+  -- Relative Method:
+    -- Current Working Directory (OS keeps track of your current position and prepends it to the relative path that you give to it through the CLI).
+    -- Define the path relative to the folder that you are already in. 
+      -- Cut off the portions of the tree path that you have already moved along.
+      -- Use ../ to move backwards a directory level if necessary (.. specifies parent directory).
+    -- Ex. If you are already in the /users folder and you want to get to the letter file in the /raj folder - raj/letter is all that is needed.
+
+- Case sensitivity is important.
+- Multiple drives are all mounted into one singular tree. 
+- You cannot have a file and a directory of the same name. A directory is technically a file in UNIX and files within the same directory cannot have the same name.
+- File names that begin with a '.' are hidden files that are normally hidden from display.
+
+Home Directories:
+- Private file area for user files.
+- Top-level name is non-standard (could be 'user', 'home', etc)
+- Login name is unique for each user.
+- Abbreviation for home directory of user (tilde character + loginname)
+  -- ~loginname
+    -- ~raj
+       ~raj/work/estimate
+
+Dev Directory:
+- Printers or other attached devices appear as files in this directory.
+- Writing to a device file corresponds to output - ie. writing to a file that represents a printer would print what you are writing as output.
+  -- prn is the printer file.
+- tty04 - teletype file (for modern use this is the terminal file).
+  -- Writing to this file prints the output to the screen as text.
+  -- Reading from this file outputs keystrokes.
+
+Common UNIX Commands:
+**WHITESPACE IS IMPORTANT IN UNIX**
+
+- ls - list - this will give a list of files in the current directory.
+  -- ls /etc - this would give a list of files in the /etc directory.
+  -- ls -l - this would give a long-form list with more details about each file and directory contained in the current directory.
+  -- ls -a - this shows ALL files, including hidden files.
+
+- cat - catenate - this command prints the contents of the specified file(s) onto the screen. It can take multiple file names as arguments.
+  -- cat chapter5 appendix - prints the contents of both of these files.
+  -- cat ch* - prints all files that start with 'ch' (* is the wildcard character).
+
+- head - prints the first 10 lines of a file (default amount).
+   -- head -n(number) - print the first number of lines specified.
+
+- tail - prints the last 10 lines of a file.
+  -- tail -n(number)
+
+- cp - copy - makes a copy of a file, takes 2 arguments - source, destination.
+  -- ex. cp letter work/letter.backup - copy letter file into work folder with the name letter.backup (while raj is the current working directory)
+  -- ex. cp ../letter letter.backup - with work as current working directory, copy letter file in raj to current directory, named as letter.backup
+
+- mv - move & rename - can rename and/or move file to different directory.
+  -- ex. mv estimate final - change name of estimate to final, same directory.
+  -- ex. mv final ../final - move final file up one level, same name.
+
+**Name collisions** - relevant to cp and mv:
+  -- UNIX will overwrite the existing file in the directory that you are trying to write to. Be very careful of this when copying or moving a file to a different directory.
+
+- rm - delete - delete a file. Once a file is deleted, it is gone. 
+  -- Many UNIX systems will have a .snapshot directory - hidden directory
+  -- Depending on system administration, may have an older version of files (a snapshot of the system).
+  -- The more frequent the snapshots, the more file space required (frequency of snapshots * # of users on system).
+
+- cd - change directory - this command will allow you to change directories.
+  --  can specify directory path absolutely or relatively.
+  -- cd . - will remain in the current directory (useless command).
+  -- cd .. - go to parent directory.
+  -- cd enter - go to home directory of the current user account.
+
+- pwd - print working directory - will display absolute path to the current working directory.
+
+- mkdir - make directory - create a directory within the current working directory.
+  -- ex. mkdir lab1 - make a directory named lab1
+
+- rmdir - remove directory - delete a directory (must be empty).
+  -- the same as rm -d (remove command with directory option)
+  --  rm -rf - remove directory and all of its contents (careful when using this option).  
+
+- who - displays users who are currently logged into the system.
+
+- whoami - displays current login name - useful when working in a windowed environment where you may be logged into multiple UNIX accounts.
+
+- date - current date and time of the system.
+
+- man - manual - info pages for each UNIX command.
+  -- man ls - this will pull up the manual page for the 'ls' command.
+
+- touch - create a file - creates a new file, takes a name as an argument, can also take a destination path.
+
+- vi - open vim text editor

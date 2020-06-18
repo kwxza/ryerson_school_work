@@ -1,0 +1,136 @@
+C Language:
+
+- 1st edition published in 1978 - Kernighan & Ritchie (Bell Labs).
+- is a general purpose programming language.
+- a "high-level" language that is very close to the machine.
+- commonly used in applications that need close integration to hardware, performance and memory optimization.
+
+
+
+Program Development:
+
+- Unix:
+  - interpreted:
+	- source
+- C:
+  - compiled:
+	- source -> *compile* -> object -> *link* -> executable	(* indicates intermediary action to reach next state of data)
+	
+	- the above chain describes a process of translation of the C code source file to an executable that can be run by machines (machine code).
+
+	- object file - contains machine code, but is not complete (may need other files/info to be linked - library references, calls to files).
+
+	- source - there can be several source files (modules), each would be separately compiled into object files
+		- these object files would be linked to produce an executable.
+
+	- Ex: myfile
+	    - source file (myfile.c)	- gcc is the compilation command (gcc - GNU Compiler Collection)
+	    - object file (myfile.o)	
+	    - executable (a.out)
+
+	- Ex: (multiple sources)
+	    - source files (myfile1.c, myfile2.c)
+	    - object file (myfile1.o, myfile2.o)
+	    - executable (a.out)
+
+** Compiled languages tend to have faster run-time performance than interpreted languages.
+	- However, the time required for the compilation step can be significant.
+
+
+
+C Program Structure:
+
+**macros and pre-processor directives**		--> not actually C-language statements
+
+int main (...) {
+    **declarations**				--> setting up variables in memory
+
+    **executable statements**			--> actions
+}
+
+Ex:
+
+#include <stdio.h>				--> macros and directives are introduced with '#' (comment)
+
+int main (void) 
+{
+    printf("Hello, world!\n");			--> not a C-language function, comes from stdio.h
+    return (0);
+}
+
+
+
+
+Data Types:
+
+- C is a strictly typed language (unlike Unix).
+- 3 basic data types:
+	- int
+	- float/double
+	- char (ASCII)
+
+
+Cardinal Rules for Variables in C:
+
+  1. Variables must be declared before use.				--> compile-time error
+  2. Variables must be initialized before being read. 			--> NOT a run-time error (value stored in uninitialized memory will be read).
+	- C does not guarantee the value of uninitialized memory. 
+	- Might be zero, have a left-over value or even random bits.
+	- We say it has "garbage".
+
+
+Input/Output with Variables:
+  - printf ("%placeholder_type", variable)
+  - scanf ("%placeholder_type", &variable)
+    - Must use a placeholder to reference a variable within these statements.
+    - Must use '&' before the referenced variable in scanf (this points towards the memory address to be written to)
+    - Placeholder must match to the data type of the variable.
+	- %d - integer
+	- %lf - float/double
+	- %c - char
+	- %s - string
+	- others - refer to wiki page for "printf" for various placeholders and formatting options.
+	
+
+Math with C: (refer to hypress examples)
+
+#include <math.h>
+
+  - gcc compiler - use gcc -lm option (math library) when writing programs using math library functions (using <math.h>)
+  - trigonometric functions will use radians by default
+
+#define PI 3.1416	--> NOT a variable, this is a macro that the compiler uses to "find-and-replace" - value cannot be changed within code.
+			--> conventional to define constants in UPPERCASE
+
+
+
+
+Selection:
+
+- Branching: (if statement)
+    - functions similarly to if statement in Java
+
+    Ex:
+	if (...)		--> conditional clause
+	{
+	...			--> actions
+	}
+	else if (...)		--> conditional clause	
+	{
+	...			--> actions
+	}
+	else			--> default clause
+	{
+	...			--> default actions
+	}
+
+
+ - Truthiness in C:
+    - 0 means false
+    - != 0 means true
+
+
+
+
+
+

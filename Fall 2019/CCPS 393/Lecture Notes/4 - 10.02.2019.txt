@@ -1,0 +1,259 @@
+Loops in Unix:
+
+- There are 3 kinds of loops in Unix:
+  1. while (conditional)
+  2. until (conditional)
+  3. for (iterative)
+
+
+While loops:
+
+  - syntax:
+	while command_list  --> evaluates if the command list returns an exit code of 0 (true)
+	do
+	.
+	.  # actions...
+	.
+	done
+
+  Ex1:
+	month=1
+	while [ ${month} -le 12 ]      --> ${}  -> formal way of specifying a variable being read from, don't usually need the {}
+	do
+	   someprocess ${month}
+	   month=$(( ${month} + 1 ))   --> $((...)) necessary to do arithmetic in bash 
+	done
+
+*** variables are text in Unix, without the sytax $(()), adding to $month would concatenate as a string
+
+  
+ Aside:
+  read oneline < file  --> redirecting file contents to STDIN of read command
+  echo $oneline  --> what is the output? First line of the file (read command reads one line from STDIN)
+
+
+  Ex2A: Reading multiple lines from a file (won't work method)
+
+	while read wholeline < file 
+	do
+	   something $wholeline
+	done
+
+  Ex2B: Reading multiple lines from a file  (correct method)
+
+	while read wholeline 
+	do
+	   echo $wholeline
+	done < file		--> redirecting file contents into the while command, not the read command
+
+
+  
+  Ex3: Processing multiple command line arguments (Method 1)
+
+    Recall: cat ch1 ch2 .... ?
+    Want: myscript arg1 arg2 ... etc
+
+	while [ $1 ]   --> while 1st CL argument exists (shift will reduce this iteratively through the loop)
+	do
+	   # some action on $1
+	   shift   --> shifts over by 1 all the CL arguments given to the script 
+	done
+	... (program continues)
+
+
+
+  Ex4: Input validation
+
+    In-class exercise: Use while loop to validate password string
+
+    My attempt:
+
+	systempassword=abcd
+	passwordinput=nothing
+	while [ $passwordinput != $systempassword ]
+	do
+	   echo What is the password?
+	   read passwordinput
+	   if [ $password = $systempassword]
+	   then 
+		echo Welcome to the system.
+	   else
+		echo Sorry, that is not the right password.
+	   fi
+	done 
+
+    Hiraki version:
+
+	while echo -n 'What is the password?'		--> -n option suppresses the cursor moving to a newline ($entry appears on same line)
+		read entry
+		[ $entry != 'Strawberry' ]		--> The prompt and reading of input is in the command_list of the while command
+	do
+	  echo --- Sorry, that is not the right password.
+	done
+
+	echo Welcome to the system.
+
+
+
+Until loops:
+
+  - also a conditional loop
+  - same as while, but with opposite logic (body executed on FALSE)
+  - syntax: 
+	until command_list
+	do
+	.
+	.   # actions....
+	.
+	done
+
+
+
+For loops:
+
+  - not a counted loop like in BASIC, Pascal, etc...
+  - think "iterative substitution"
+  - syntax:
+	for variable in val1 val2...
+	do
+	.
+	.   # action(s)...
+	.
+	done
+
+  
+  Ex1: Renaming multiple files
+
+   DOS:		ren assig* assig*.bak	--> works well in DOS
+   Unix:	mv assig* assig*.bak	--> does not work correctly in Unix
+
+  Instead:
+	for filevar in assig*
+	do
+	  mv ${filevar} ${filevar}.backup
+	done
+
+
+
+  Ex2: Count number of entries in a given directory
+
+	count=0
+	for files in $(ls /etc)
+	do
+	  count=$(( $count + 1 ))
+	done
+
+	echo There are $count entries
+
+
+
+  Ex3: Processing multiple CL arguments (Method 2)
+
+	for cmdarg in $*		--> $* means all CL arguments starting from $1, runtime variable that is evaluated each time loop runs
+	do
+	   someprocess $cmdarg
+	done
+	
+
+
+Process Control & Multi-Tasking:
+
+ - Default mode of execution is to run in the foreground.
+ - It is possible to run one or more jobs in the background.
+ - There can be at most 1 foreground job.
+ - The foreground job has control of the terminal (keyboard, screen).
+
+
+  Ex1:
+	$ long_job <ENTER>		# starts new job in foreground	
+	_				# cursor
+	.
+	CTRL-Z				# suspends (pauses) the foreground job
+	[3] stopped
+	.
+	$ jobs				# display active jobs
+	[3] stopped long_job		# identify job# ie. 3
+	.
+	$ bg %3				# resumes job#3 in background
+	.	
+	$ jobs				# check running status
+	[3] running long_job
+	.
+	$ jobs	
+	[3] stopped long_job		# observe job has stopped
+	.	
+	$ fg %3				# bring job#3 to foreground
+	_				# cursor
+
+
+  Ex2:
+	$ long_job (options, parameters) & <ENTER>		# start new instance of job in background
+	[2] 9767
+	$							# you have command prompt back immediately
+	.
+	$ jobs
+	[2] running long_job
+	.	
+	$ fg %2							# bring to foreground
+	_							# cursor
+
+
+  - bg command vs & <ENTER>:
+    - bg resumes an existing job in the background
+    - & <ENTER> creates a new instance of the job in the background
+
+
+ - How to kill (permanently stop) a job:
+
+    Method 1 (with access to fg window):
+
+	$ jobs				# identify job#
+	[4]				# observe job# is 4
+	.
+	$ fg %4				# bring to foreground
+	.
+	CTRL-C				# try to kill
+	_				# cursor
+
+
+    Method 2 (from some window):
+	
+	$ jobs				# identify job#
+	[4]
+	.	
+	$ kill %4			# send s/w termination to job#4
+	.
+	$ jobs 				# check status
+	[4] terminated
+	    running			# might see that job is still running
+	.
+	$ kill -9 %4			# escalate, severe kill
+	.
+	$		
+
+ 
+    Method 3 (from same window or another window):
+ *** ps command to see all jobs in current session or other sessions
+
+	$ ps -f -u yourlogin		# process status
+	. PID
+	. 9861				# identify PID of job (PID is not the same as job# - job# always uses %)
+	.
+	$ kill 9861			# send s/w termination signal
+	.
+	$ ps -f -u yourlogin		# check
+	. PID
+	. Terminated - 9861		# escalate if job is not terminated
+	
+
+
+
+
+
+
+
+
+
+
+
+

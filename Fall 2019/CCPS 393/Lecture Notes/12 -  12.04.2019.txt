@@ -1,0 +1,30 @@
+Inheritance:
+
+  - base class --> derived class (similar to java)
+
+
+Polymorphism:
+  
+  - refers to determining which program behaviour to execute based on data types.
+
+  - Two types:	
+	- compile-time (function-overloading)
+	- run-time
+
+
+Q & A:
+
+Pass by Reference in C and C++: Function Calls
+
+  In both C and C++, arguments are passed by value.
+  Sometimes the value is an address (this is called pass by reference in some languages.
+	
+	C/C++ syntax is the same for declaring a pointer.
+
+C:
+	function:     	myfunc(int *n, int *m)
+	main:		myfunc(&a, &b)
+
+C++:
+	function:	myfunc2(int &r, int data)  reference
+	main:		myfunc2(c, d)

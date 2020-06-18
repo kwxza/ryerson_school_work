@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# medcodelookup
+# Kasaine Kipusi
+# Student ID: 500936268
+# Assignment #1 - Database Assignment
+# CCPS 393 Section 310
+# Instructor: L. Hiraki
+# Purpose: Search a medication list and produce a report as requested by the user.
+
+echo medcodelookup shows the generic name or dose of medication by searching the Medication Code.
+echo Enter 'ZZZ' to exit medcodelookup.
+
+# The initial while loop validates input to 
+# check if the user has typed "ZZZ" to exit.
+while
+    echo -n "Enter Medication Code:"
+    read code
+    [ $code != "ZZZ" ]
+do
+    # While loop validates name/dose input.
+    while
+        echo -n "See Generic Name (G/g) or Dose (D/d)?"
+        read requestedinfo
+        # grep matches only the appropriate input.
+	grep -q "^[GgDd]$" <<< $requestedinfo
+        # test checks if grep command was unsuccessful.
+        [ $? -ne 0 ]
+    do
+        echo Please enter only G/g or D/d!!
+    done
+
+    # Here, case will set the correct substring paramters 
+    # to show the information requested by the user. 
+    case $requestedinfo in
+        "G"|"g") offset=12; length=13; label="Generic Name";;
+        "D"|"d") offset=25; length=14; label="Dose";;
+    esac
+
+    # $noresult is a boolean value that will be set
+    # to true if any results are found by the search.
+    noresult=true
+
+    # The medslist file is read into the while loop and 
+    # examined, one line at a time.
+    while read oneline
+    do
+        # Using here string redirection and substring expansion
+        # to search the current line in the appropriate columns
+        # for a Medication Code that matches the user's input.
+        grep -q $code <<< ${oneline:4:8}
+        if [ $? -eq 0 ]
+        then
+            noresult=false
+            # The information requested by the user is displayed via
+            # substring expansion, with the parameters being the 
+            # $offset and $length variables set above.
+            echo -e Med Code: ${oneline:4:8}\\n$label: ${oneline:$offset:$length}
+        fi
+    done < medslist
+
+    # This line will only execute if $noresult was not 
+    # set to true by the above while loop that checked
+    # through the medslist file for any matches.
+    $noresult && echo No such Medication Code.
+done
+
+echo Goodbye...

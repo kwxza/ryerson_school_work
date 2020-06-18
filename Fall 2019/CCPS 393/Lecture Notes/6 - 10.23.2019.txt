@@ -1,0 +1,129 @@
+Conditional Structures Cont.
+
+- Delimiting the conditional blocks of if-else if-else statements:
+	- Conditional blocks don't need curly braces if there is only one statement in the conditional block.
+	- Adding curly braces is always valid, it's better to use them to be safe.
+
+
+Multi-way branching:
+  - switch statements:				--> similar to 'case' in Unix and 'switch' in Java
+	
+	switch (a) {
+		case 0: 
+			// actions....
+			break;
+		case 1: 
+			// actions....
+			break;
+		case 2: 
+			// actions....
+			break;
+		default: 
+			// actions....
+			break;
+
+	}	
+
+    - CANNOT using floating point values in switch's case statements
+    - must use DISCRETE values, no relational statements
+    - can stack case statements on action statement:
+	- eg.
+		case 'R':
+		case 'r':
+			// actions...
+			break;
+
+    - Omitting the 'break' statement will cause control flow to fall-through to the actions of the next case statement.
+	- When fall-through occurs, the clause of the next case statement is NOT evaluated before its block is executed.
+
+
+printf placeholder formatting:
+  - Refer to printf Wikipedia:
+	- https://en.wikipedia.org/wiki/Printf#Format_placeholder_specification
+
+
+
+
+
+Files in C:
+
+  - Already can do redirection to/from a C program from within a Unix shell:
+    -eg:
+	./a.out > save_output
+	./a.out < data_in
+	./a.out < infile > outfile
+
+  - The above is working with files via Unix commands
+
+  - How to read/write to files from within a C program?
+
+    - Steps:				Code:
+	1. Declare file pointer		  1. FILE *in, *out;				--> pointers for input and output files 				
+	2. Initialize pointer		  2. in = fopen ("work/data.txt", "r");		--> most common modes: read, write, append
+					     out = fopen ("work/output.txt, "w");	    - fopen will create the file if it doesn't exist
+							^path            ^mode		    - use "a" mode to append instead of overwriting
+	3. Perform input/output		  3. fscanf (in, "%d", &value);			--> similar to scanf, uses initialized file pointer
+					     fprintf (out, "%d", value);		--> out is a file pointer to output file 
+	4. Close file			  4. fclose (in);
+					     fclose (out);				--> closing both input and output files
+
+
+
+
+Loops in C:
+
+  - There are 3 kinds of loops in C:
+    1. for 
+	- standard counted loop
+		- for C 89, the counter variable for a for loop must be initialized as a global variable (ie - outside the loop)
+		- common to find on legacy systems
+    2. while 
+	- conditional loop
+		- condition tested before entry into body
+    3. do-while 
+	- conditional loop
+		- condition tested after body is executed once
+		- often used for input validation
+
+
+  - Delimiting loops in C works the same as conditionals:
+    - ie. If there are no curly braces around the looping block, then the compiler assumes there is only 1 statement in the body.
+    - The compiler does not enforce brace delimiters. Forgetting them can cause logic errors that are syntactically valid.
+   
+
+  - Body execution:
+	- For and while loops can potentially not execute depending on if their initial expression does not meet their loop-condition.
+	- Do-while loops always execute the body's contents at least once.
+
+
+
+
+Functions in C:
+
+  - Definition:
+	- A group of statements which are assigned a name.
+
+  - A function:
+	- Can have zero or more incoming parameters (arguments).
+	- Can have a single return value only.
+	- The return value can be of any type.
+	- Return type must be declared.
+	- Functions must be declared before they are used.
+
+  - Syntax:
+	/* Definition */
+	output_Type funcname (incoming_parameters)		--> the incoming parameters' names and types must be defined in the parentheses
+	{
+		// statements...
+	}
+
+  - Function prototypes:
+	- Essentially a header that declares the function's name, return type and parameter types without declaring the body.
+	- Allows using functions in main before fully declaring their body of statements.
+	- Prototypes let you declare the function name at the top of the code and then define its statements below.
+	- Ex:
+		- void func_name (int);				--> this goes at the top of the c program before the main function.
+
+
+
+

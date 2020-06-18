@@ -1,0 +1,37 @@
+Constructor Overloading:
+
+Recall that it is necessary to initialize memory in both C and C++.
+ For object data in C++, can use:
+	- inline inialization
+	- constructor
+
+  We will combine function overloading with constructors.
+
+
+The 'this' implicit parameter:
+  
+  When you say:
+	object.function(...)
+
+  it gets converted to:
+	Function(object,...)
+
+  To refer to the implicitly passed object, use the term 'this' as a pointer to the object.
+
+
+Operator Overloading:
+
+
+Pointers:
+
+List Implementation Choices:
+  - Arrays
+  - Vectors
+  - Linked list
+
+
+Operators for Memory Allocation and Deallocation:
+		C		C++
+Allocation	malloc()	new
+De-allocation	free()		delete
+Pointer Ref.	->		->
